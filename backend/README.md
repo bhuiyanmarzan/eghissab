@@ -160,7 +160,11 @@ backend/
 ```
 
 ## 10. add igtignore file
-
+```
+bin/
+backend/bin/
+```
+## build production ready server
 
 
 
