@@ -14,7 +14,7 @@ func main() {
 	cfg := config.MustLoadConfig()
 	fmt.Printf("Starting server on port %s\n", cfg.Port)
 	mux := http.NewServeMux()
-	mux.HandleFunc("/healthz", handlers.Healthz())
+	mux.HandleFunc("/healthz", handlers.Health)
 	srv := &http.Server{
 		Addr:         ":" + cfg.Port,
 		Handler:      mux,
