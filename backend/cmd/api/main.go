@@ -7,12 +7,23 @@ import (
 	"time"
 
 	"github.com/bhuiyanmarzan/eghissab/internal/config"
+	"github.com/bhuiyanmarzan/eghissab/internal/db"
 	"github.com/bhuiyanmarzan/eghissab/internal/handlers"
 )
 
 func main() {
 	cfg := config.MustLoadConfig()
+
+	_, err := db.Connect(cfg.DatabaseURL)
+
+	if err != nil {
+		log.Fatalf("main.db.connect: %v", err)
+	}
+
+	fmt.Println("Database connected!")
+
 	fmt.Printf("Starting server on port %s\n", cfg.Port)
+
 	mux := http.NewServeMux()
 	mux.HandleFunc("/healthz", handlers.Health)
 	srv := &http.Server{
